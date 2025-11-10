@@ -3,16 +3,14 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from backend.core.config import settings
 
-engine = create_engine(settings.DATABASE_URL)
+engine = create_engine(settings.DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
 
 def get_db():
-    """
-    Dependency function to get database session.
-    """
+    """Dependency function to get database session."""
     db = SessionLocal()
     try:
         yield db
@@ -21,10 +19,6 @@ def get_db():
 
 
 def init_db():
-    """
-    Initialize database tables.
-    """
-    from backend.models.product import Product
-    from backend.models.scrape_log import ScrapeLog
-
+    """Initialize database tables."""
+    from backend.models.chatbot import Conversation, Message, FAQ
     Base.metadata.create_all(bind=engine)

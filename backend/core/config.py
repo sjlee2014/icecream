@@ -1,10 +1,9 @@
 from pydantic_settings import BaseSettings
-from typing import Optional
 
 
 class Settings(BaseSettings):
     # Database
-    DATABASE_URL: str = "sqlite:///./data/icecream.db"
+    DATABASE_URL: str = "sqlite:///./data/chatbot.db"
 
     # API
     API_HOST: str = "0.0.0.0"
@@ -13,8 +12,6 @@ class Settings(BaseSettings):
 
     # Security
     SECRET_KEY: str = "your-secret-key-change-in-production"
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     # CORS
     CORS_ORIGINS: list = [
@@ -22,11 +19,11 @@ class Settings(BaseSettings):
         "http://localhost:8000",
     ]
 
-    # Scraper
-    SCRAPER_USER_AGENT: str = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-    SCRAPER_HEADLESS: bool = True
-    SCRAPER_INTERVAL_HOURS: int = 6
-    TARGET_URL: str = "https://i-screammall.co.kr/"
+    # Chatbot Settings
+    BUSINESS_NAME: str = "아이스크림몰"
+    BUSINESS_HOURS: str = "평일 09:00-18:00"
+    SUPPORT_EMAIL: str = "support@i-screammall.co.kr"
+    SUPPORT_PHONE: str = "1588-0000"
 
     class Config:
         env_file = ".env"

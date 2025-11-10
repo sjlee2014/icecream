@@ -2,12 +2,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.core.config import settings
 from backend.core.database import init_db
-from backend.api import products, scraper
+from backend.api import chat, faq
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="Icecream Mall Scraper API",
-    description="API for scraping and analyzing products from i-screammall.co.kr",
+    title="고객 상담 챗봇 API",
+    description=f"{settings.BUSINESS_NAME} 고객 상담 챗봇 시스템",
     version="1.0.0",
 )
 
@@ -21,8 +21,8 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(products.router)
-app.include_router(scraper.router)
+app.include_router(chat.router)
+app.include_router(faq.router)
 
 
 @app.on_event("startup")
@@ -35,10 +35,15 @@ async def startup_event():
 def root():
     """Root endpoint."""
     return {
-        "message": "Icecream Mall Scraper API",
+        "message": f"{settings.BUSINESS_NAME} 고객 상담 챗봇 API",
         "version": "1.0.0",
         "docs": "/docs",
         "status": "running",
+        "business_hours": settings.BUSINESS_HOURS,
+        "contact": {
+            "email": settings.SUPPORT_EMAIL,
+            "phone": settings.SUPPORT_PHONE,
+        }
     }
 
 
