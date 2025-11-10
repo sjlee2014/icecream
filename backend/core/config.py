@@ -4,7 +4,7 @@ from typing import Optional
 
 class Settings(BaseSettings):
     # Database
-    DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/icecream_db"
+    DATABASE_URL: str = "sqlite:///./data/icecream.db"
 
     # API
     API_HOST: str = "0.0.0.0"
