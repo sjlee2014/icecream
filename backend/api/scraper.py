@@ -4,7 +4,7 @@ from sqlalchemy import desc
 from typing import List, Optional
 from backend.core.database import get_db
 from backend.models.scrape_log import ScrapeLog
-from backend.scraper.icecream_scraper import run_scraper
+from backend.scraper.improved_scraper import run_improved_scraper as run_scraper
 from pydantic import BaseModel
 from datetime import datetime
 
